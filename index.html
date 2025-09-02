@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>받아쓰기 급수별</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>✏️ 받아쓰기 급수별</h1>
+    <div class="right">
+      <button id="btnHelp" class="ghost">도움말</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- 설정 패널 -->
+    <section class="card" id="setupCard">
+      <h2>시작하기</h2>
+      <div class="grid two">
+        <label class="form-row">
+          <span>급수 선택</span>
+          <select id="gradeSelect"></select>
+        </label>
+        <label class="form-row">
+          <span>음성 속도</span>
+          <input id="rate" type="range" min="0.6" max="1.4" step="0.1" value="1">
+          <small id="rateVal">1.0x</small>
+        </label>
+        <label class="form-row">
+          <span>반복 횟수</span>
+          <input id="repeat" type="number" min="1" max="5" value="2">
+        </label>
+        <label class="form-row">
+          <span>음성(가능한 경우)</span>
+          <select id="voiceSelect"></select>
+        </label>
+      </div>
+      <button id="btnStart" class="primary">시작하기 ▶</button>
+      <div class="records" id="recordSummary"></div>
+    </section>
+
+    <!-- 진행 패널 -->
+    <section class="card hidden" id="playCard">
+      <div class="status-row">
+        <div class="progress">
+          <div id="progressBar"></div>
+        </div>
+        <div class="scorebox">
+          ⭐ <span id="score">0</span>점
+        </div>
+      </div>
+
+      <div class="prompt">
+        <button id="btnSpeak" class="big">🔊 들려주세요</button>
+        <button id="btnRepeat" class="ghost">다시 듣기</button>
+      </div>
+
+      <div class="answer-row">
+        <input id="answer" type="text" placeholder="들린 문장을 그대로 써 보세요" autocomplete="off" />
+        <button id="btnCheck" class="primary">채점</button>
+      </div>
+
+      <div id="feedback" class="feedback"></div>
+      <div class="nav-row">
+        <button id="btnPrev" class="ghost">이전</button>
+        <button id="btnNext" class="ghost">다음</button>
+        <span class="qpos" id="qpos">1 / 10</span>
+      </div>
+    </section>
+
+    <!-- 결과 패널 -->
+    <section class="card hidden" id="resultCard">
+      <h2>결과</h2>
+      <p class="bigscore">총점: <strong id="finalScore">0</strong>점</p>
+      <p id="badge" class="badge"></p>
+      <div id="detailList" class="detail-list"></div>
+      <div class="records" id="savedRecord"></div>
+      <div class="center">
+        <button id="btnRetry" class="primary">다시 풀기</button>
+        <button id="btnHome" class="ghost">처음으로</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <small>© 받아쓰기 급수 앱</small>
+  </footer>
+
+  <canvas id="confetti"></canvas>
+
+  <dialog id="helpDialog">
+    <h3>도움말</h3>
+    <ul>
+      <li>급수를 고르고 <b>시작하기</b>를 누르면 10문제가 랜덤으로 나옵니다.</li>
+      <li><b>🔊 들려주세요</b>를 눌러 문장을 듣고 아래에 써 보세요.</li>
+      <li>정답은 10점, 오답은 0점입니다. 총 100점 만점.</li>
+      <li>맞춤법 비교는 공백/마침표 등 단순 기호는 무시합니다.</li>
+      <li>각 급수별 점수 기록은 이 기기(브라우저)의 <b>저장공간</b>에 저장됩니다.</li>
+    </ul>
+    <div class="center"><button id="btnCloseHelp" class="primary">닫기</button></div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
